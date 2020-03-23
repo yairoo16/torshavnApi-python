@@ -1,0 +1,32 @@
+#creating virutual box
+vagrant up
+
+#connecting to virtual server
+vagrant ssh
+
+#disconnect 
+exit
+
+# navigate to vagrant directory
+cd /vagrant
+
+#reload box
+vagrant reload
+
+#run a program
+python hello_world.py
+
+#activate environment
+source ~/env/bin/activate
+
+#python migrations
+python manage.py makemigrations app_name
+
+#run migration
+python manage.py migrate
+
+#show all migrations
+python manage.py showmigrations my_app
+
+#reverse all migartions 
+python manage.py migrate my_app zero
