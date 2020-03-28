@@ -13,6 +13,12 @@ cd /vagrant
 #reload box
 vagrant reload
 
+#stop vagrant 
+vagrant halt
+
+vagrant destroy - Stop and deletes all traces of the vagrant machine 
+vagrant halt stops the vagrant machine
+
 #run a program
 python hello_world.py
 
