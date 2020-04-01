@@ -137,4 +137,4 @@ eb-package.zip
 static/
 
 # ignore requirements
-requirements.txt
+# requirements.txt
