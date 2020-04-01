@@ -44,3 +44,8 @@ python manage.py migrate my_app zero
 
 #start server
 python manage.py runserver 0.0.0.0:8000
+
+#connecting to aws
+ssh ubuntu@ec2-3-83-8-189.compute-1.amazonaws.com
+
+put in password: hepcat08
