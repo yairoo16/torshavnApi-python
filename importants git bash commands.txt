@@ -10,6 +10,12 @@ exit
 # navigate to vagrant directory
 cd /vagrant
 
+# create new environment
+python -m venv ~/env
+
+#activate environment
+source ~/env/bin/activate
+
 #reload box
 vagrant reload
 
@@ -22,8 +28,7 @@ vagrant halt stops the vagrant machine
 #run a program
 python hello_world.py
 
-#activate environment
-source ~/env/bin/activate
+
 
 #python migrations
 python manage.py makemigrations app_name
@@ -36,3 +41,6 @@ python manage.py showmigrations my_app
 
 #reverse all migartions 
 python manage.py migrate my_app zero
+
+#start server
+python manage.py runserver 0.0.0.0:8000

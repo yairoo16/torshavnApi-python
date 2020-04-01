@@ -77,11 +77,19 @@ WSGI_APPLICATION = 'torshavn_project.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'torshavn-maps',
+    #     'USER': 'postgres',
+    #     'PASSWORD':'Junglist08',
+    #     'HOST':'localhost',
+    #     'PORT':'5432',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'torshavn-maps',
-        'USER': 'postgres',
-        'PASSWORD':'Junglist08',
+        'NAME': 'torshavn_db',
+        'USER': 'yairoo',
+        'PASSWORD':'hepcat08',
         'HOST':'localhost',
         'PORT':'5432',
     }
