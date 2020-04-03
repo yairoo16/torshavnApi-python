@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'torshavn_project.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # local dabatase
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': 'torshavn-maps',
@@ -88,12 +89,22 @@ DATABASES = {
     #     'HOST':'localhost',
     #     'PORT':'5432',
     # }
+    # Vagrant database
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'torshavn_db',
+    #     'USER': 'yairoo',
+    #     'PASSWORD':'hepcat08',
+    #     'HOST':'localhost',
+    #     'PORT':'5432',
+    # }
+    # AWS
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'torshavn_db',
-        'USER': 'yairoo',
-        'PASSWORD':'hepcat08',
-        'HOST':'localhost',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':'Junglist08',
+        'HOST':'torshavndb-instance.cqugmanngrt4.us-east-1.rds.amazonaws.com',
         'PORT':'5432',
     }
 }
