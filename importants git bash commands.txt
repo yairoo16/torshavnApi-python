@@ -58,6 +58,9 @@ put in password: hepcat08
 #run setup script
 curl -sL https://raw.githubusercontent.com/yairoo16/torshavnApi-python/master/deploy/setup.sh | sudo bash -
 
+#update script
+sudo sh ./deploy/update.sh
+
 #connect to aws instance 
 ssh ubuntu@ec2-3-83-8-189.compute-1.amazonaws.com
 --passphrase for key c/users/benor/.ssh/id_rsa = hepcat08
