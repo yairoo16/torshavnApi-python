@@ -5,11 +5,13 @@ class HelloSerializer(serializers.Serializer):
     """Serializes a name field for testing our AIView"""
     name = serializers.CharField(max_length=10)
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     """Serializes a user profile object"""
+    token = serializers.CharField(max_length=255, read_only=True)
+    
     class Meta:
-        model = models.UserProfile
-        fields = ('id', 'email', 'name', 'password')
+        model = models.User
+        fields = ('id', 'email', 'name', 'password', 'token')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -19,10 +21,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         """Create and return a new user"""
-        user = models.UserProfile.objects.create_user(
+        user = models.User.objects.create_user(
             email=validated_data['email'],
             name=validated_data['name'],
-            password=validated_data['password']
+            password=validated_data['password'],
         )
 
         return user
@@ -41,3 +43,9 @@ class ProfileFeedItemSerializer(serializers.ModelSerializer):
         model = models.ProfileFeedItem
         fields = ('id', 'user_profile', 'status_text', 'created_on')
         extra_kwargs = {'user_profile': {'read_only': True}}
+
+class MarkerSerializer(serializers.ModelSerializer):
+    """Serializes marker items"""
+    class Meta:
+        model = models.Marker
+        fields = ('id', 'draggable', 'animation', 'image_path', 'label', 'description', 'icon_path', 'lat', 'lng')

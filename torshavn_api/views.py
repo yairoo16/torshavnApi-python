@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from torshavn_api import serializers
 from torshavn_api import models
 from torshavn_api import permissions
+from torshavn_api.serializers import MarkerSerializer
 
 # Create your views here.
 
@@ -100,12 +101,11 @@ class HelloViewSet(viewsets.ViewSet):
         """Handle removing an object"""
         return Response({'http_method': 'DELETE'})
 
-
-class UserProfileViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """Handle creating and updating profiles"""
-    serializer_class = serializers.UserProfileSerializer
-    queryset = models.UserProfile.objects.all()
-    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+    # authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email',)
@@ -114,7 +114,7 @@ class UserLoginApiView(ObtainAuthToken):
     """Handle creating user authentication tokens"""
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
-class UserProfileFeedViewSet(viewsets.ModelViewSet):
+class UserFeedViewSet(viewsets.ModelViewSet):
     """Handles creating , reading and updating profile feed items"""
     serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
@@ -127,4 +127,12 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
         serializer.save(user_profile=self.request.user)
-    
+
+class MarkerViewSet(viewsets.ModelViewSet):
+    """Marker API ViewSet"""
+    serializer_class = serializers.MarkerSerializer
+
+    def list(self, request):
+        queryset = models.Marker.objects.all()
+        serializer = MarkerSerializer(queryset, many=True)
+        return Response(serializer.data)

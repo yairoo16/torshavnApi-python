@@ -65,3 +65,5 @@ sudo sh ./deploy/update.sh
 ssh ubuntu@ec2-3-83-8-189.compute-1.amazonaws.com
 --passphrase for key c/users/benor/.ssh/id_rsa = hepcat08
 
+#create superuser
+ubuntu@ip-172-31-95-197:/usr/local/apps/torshavn_api$ sudo env/bin/python manage.py createsuperuser
