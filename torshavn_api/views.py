@@ -7,6 +7,7 @@ from rest_framework import filters
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 
 from torshavn_api import serializers
 from torshavn_api import models
@@ -130,9 +131,17 @@ class UserFeedViewSet(viewsets.ModelViewSet):
 
 class MarkerViewSet(viewsets.ModelViewSet):
     """Marker API ViewSet"""
+    queryset = models.Marker.objects.all()
     serializer_class = serializers.MarkerSerializer
 
     def list(self, request):
-        queryset = models.Marker.objects.all()
+        queryset = self.get_queryset()
         serializer = MarkerSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
+        """Handle getting an object by its ID"""
+        queryset = self.get_queryset()
+        marker = get_object_or_404(queryset, pk=pk)
+        serializer = MarkerSerializer(marker)
         return Response(serializer.data)
