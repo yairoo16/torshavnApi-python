@@ -27,6 +27,7 @@ SECRET_KEY = 'smamxjcv%%0i+1(^-cis-ec*nnyxx!d2zy+%=eld=#+dhiz7^n'
 DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
 ALLOWED_HOSTS = [
+    'torshavn-api-python.herokuapp.com',
     'ec2-3-83-8-189.compute-1.amazonaws.com',
     '127.0.0.1'
  ]
