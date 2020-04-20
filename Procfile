@@ -1,0 +1,1 @@
+web: gunicorn torshavn_project.wsgi --log-file -
