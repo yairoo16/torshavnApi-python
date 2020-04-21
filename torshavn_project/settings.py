@@ -132,12 +132,20 @@ DATABASES = {
     #     'HOST':'torshavndb-instance.cqugmanngrt4.us-east-1.rds.amazonaws.com',
     #     'PORT':'5432',
     # }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'd8um19kamnrovg',
+    #     'USER': 'luthpnwxpidtsq',
+    #     'PASSWORD':'2f47f734d78b5e7a96f88da5ef8315596a3769e7d1022a4e9cf966fba5c8c717',
+    #     'HOST':'ec2-52-87-58-157.compute-1.amazonaws.com',
+    #     'PORT':'5432',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8um19kamnrovg',
-        'USER': 'luthpnwxpidtsq',
-        'PASSWORD':'2f47f734d78b5e7a96f88da5ef8315596a3769e7d1022a4e9cf966fba5c8c717',
-        'HOST':'ec2-52-87-58-157.compute-1.amazonaws.com',
+        'NAME': 'deteg18vlf07kt',
+        'USER': 'okoufrgabdexpf',
+        'PASSWORD':'16300b248c28bf220a8dcea3022846fc7c42e7e43fab76ee70e7c97e3e7ceaac',
+        'HOST':'ec2-54-204-37-92.compute-1.amazonaws.com',
         'PORT':'5432',
     }
 }
