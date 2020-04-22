@@ -67,3 +67,9 @@ ssh ubuntu@ec2-3-83-8-189.compute-1.amazonaws.com
 
 #create superuser
 ubuntu@ip-172-31-95-197:/usr/local/apps/torshavn_api$ sudo env/bin/python manage.py createsuperuser
+
+# create virtual environment
+python -m venv venv
+
+# activate virtual environment
+. venv/Scripts/activate
