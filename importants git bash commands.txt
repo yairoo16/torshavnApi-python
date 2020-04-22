@@ -73,3 +73,12 @@ python -m venv venv
 
 # activate virtual environment
 . venv/Scripts/activate
+
+#create requirements dev file
+pip freeze > requirements-dev.txt
+
+#add heroku config
+heroku plugins:install heroku-config
+
+#push config settings to heroku
+heroku config:push -a torshavn-api-python

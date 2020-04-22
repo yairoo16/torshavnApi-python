@@ -1,8 +1,2 @@
-django==2.2
-djangorestframework==3.9.2
-psycopg2-binary
-djangorestframework-jwt
-django-cors-headers
-dj-static
-python-decouple
+-r requirements-dev.txt
 gunicorn
