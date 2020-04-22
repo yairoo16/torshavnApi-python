@@ -106,41 +106,6 @@ JWT_AUTH = {
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    # local dabatase
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'torshavn-maps',
-    #     'USER': 'postgres',
-    #     'PASSWORD':'Junglist08',
-    #     'HOST':'localhost',
-    #     'PORT':'5432',
-    # }
-    # Vagrant database
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'torshavn_db',
-    #     'USER': 'yairoo',
-    #     'PASSWORD':'hepcat08',
-    #     'HOST':'localhost',
-    #     'PORT':'5432',
-    # }
-    # AWS
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'postgres',
-    #     'USER': 'postgres',
-    #     'PASSWORD':'Junglist08',
-    #     'HOST':'torshavndb-instance.cqugmanngrt4.us-east-1.rds.amazonaws.com',
-    #     'PORT':'5432',
-    # }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'd8um19kamnrovg',
-    #     'USER': 'luthpnwxpidtsq',
-    #     'PASSWORD':'2f47f734d78b5e7a96f88da5ef8315596a3769e7d1022a4e9cf966fba5c8c717',
-    #     'HOST':'ec2-52-87-58-157.compute-1.amazonaws.com',
-    #     'PORT':'5432',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'deteg18vlf07kt',
