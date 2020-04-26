@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework import filters
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
@@ -106,8 +107,11 @@ class UserViewSet(viewsets.ModelViewSet):
     """Handle creating and updating profiles"""
     serializer_class = serializers.UserSerializer
     queryset = models.User.objects.all()
-    # authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.UpdateOwnProfile,)
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (
+        permissions.UpdateOwnStatus,
+        IsAuthenticated
+    )
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email',)
 
@@ -119,7 +123,7 @@ class UserFeedViewSet(viewsets.ModelViewSet):
     """Handles creating , reading and updating profile feed items"""
     serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
-    authentication_classes = (TokenAuthentication,)
+    authentication_classes = (JSONWebTokenAuthentication,)
     permission_classes = (
         permissions.UpdateOwnStatus,
         IsAuthenticated
@@ -131,17 +135,47 @@ class UserFeedViewSet(viewsets.ModelViewSet):
 
 class MarkerViewSet(viewsets.ModelViewSet):
     """Marker API ViewSet"""
-    queryset = models.Marker.objects.all()
     serializer_class = serializers.MarkerSerializer
-
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = MarkerSerializer(queryset, many=True)
-        return Response(serializer.data)
+    queryset = models.Marker.objects.all()
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (
+        IsAuthenticated,
+    )
+    # def list(self, request):
+    #     queryset = self.get_queryset()
+    #     serializer = MarkerSerializer(queryset, many=True)
+    #     return Response(serializer.data)
     
-    def retrieve(self, request, pk=None):
-        """Handle getting an object by its ID"""
-        queryset = self.get_queryset()
-        marker = get_object_or_404(queryset, pk=pk)
-        serializer = MarkerSerializer(marker)
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None):
+    #     """Handle getting an object by its ID"""
+    #     queryset = self.get_queryset()
+    #     marker = get_object_or_404(queryset, pk=pk)
+    #     serializer = MarkerSerializer(marker)
+    #     return Response(serializer.data)
+
+    # def create(self, request):
+    #     """Create a new marker"""
+    #     serializer = self.serializer_class(data=request.data)
+
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         label = serializer.validated_data.get('label')
+    #         message = f'Marker: {label} saved'
+    #         return Response({'message': message})
+    #     else:
+    #         return Response(
+    #             serializer.errors,
+    #             status=status.HTTP_400_BAD_REQUEST
+    #         )    
+
+    # def update(self, request, pk=None):
+    #     """Handle updating an object"""
+    #     return Response({'http_method': 'PUT'})
+
+    # def partial_update(self, request, pk=None):
+    #     """Handle updating part of an object"""
+    #     return Response({'http_method': 'PATCH'})
+
+    # def destroy(self, request, pk=None):
+    #     """Handle removing an object"""
+    #     return Response({'http_method': 'DELETE'})
