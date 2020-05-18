@@ -14,6 +14,7 @@ from torshavn_api import serializers
 from torshavn_api import models
 from torshavn_api import permissions
 from torshavn_api.serializers import MarkerSerializer
+from torshavn_api.serializers import UserSerializer
 
 # Create your views here.
 
@@ -107,13 +108,49 @@ class UserViewSet(viewsets.ModelViewSet):
     """Handle creating and updating profiles"""
     serializer_class = serializers.UserSerializer
     queryset = models.User.objects.all()
-    authentication_classes = (JSONWebTokenAuthentication,)
-    permission_classes = (
-        permissions.UpdateOwnStatus,
-        IsAuthenticated
-    )
+    # authentication_classes = (JSONWebTokenAuthentication,)
+    # permission_classes = (
+    #     permissions.UpdateOwnStatus,
+    #     IsAuthenticated
+    # )
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email',)
+
+    # def list(self, request):
+    #     queryset = self.get_queryset()
+    #     serializer = UserSerializer(queryset, many=True)
+    #     return Response(serializer.data)
+    
+    # def retrieve(self, request, pk=None):
+    #     """Handle getting an object by its ID"""
+    #     queryset = self.get_queryset()
+    #     marker = get_object_or_404(queryset, pk=pk)
+    #     serializer = MarkerSerializer(marker)
+    #     return Response(serializer.data)
+
+    def create(self, request):
+        """Create a new user"""
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            # token = serializer.data.get('token')
+            # return Response({'token': token})
+            return Response({'status': 'OK'})
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )    
+
+    def update(self, request, pk=None):
+        """Handle updating an object"""
+        authentication_classes = (JSONWebTokenAuthentication,)
+        permission_classes = (
+            permissions.UpdateOwnStatus,
+            IsAuthenticated
+        )
+        return Response({'http_method': 'PUT'})
 
 class UserLoginApiView(ObtainAuthToken):
     """Handle creating user authentication tokens"""
@@ -135,16 +172,22 @@ class UserFeedViewSet(viewsets.ModelViewSet):
 
 class MarkerViewSet(viewsets.ModelViewSet):
     """Marker API ViewSet"""
-    serializer_class = serializers.MarkerSerializer
-    queryset = models.Marker.objects.all()
-    authentication_classes = (JSONWebTokenAuthentication,)
-    permission_classes = (
-        IsAuthenticated,
-    )
-    # def list(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = MarkerSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+    # serializer_class = serializers.MarkerSerializer
+    # queryset = models.Marker.objects.all()
+    # authentication_classes = (JSONWebTokenAuthentication,)
+    # permission_classes = (
+    #     IsAuthenticated,
+    # )
+    def list(self, request):
+        serializer_class = serializers.MarkerSerializer
+        queryset = models.Marker.objects.all()
+        authentication_classes = (JSONWebTokenAuthentication,)
+        permission_classes = (
+            IsAuthenticated,
+        )
+        # queryset = self.get_queryset()
+        serializer = MarkerSerializer(queryset, many=True)
+        return Response(serializer.data)
     
     # def retrieve(self, request, pk=None):
     #     """Handle getting an object by its ID"""
