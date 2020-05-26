@@ -60,34 +60,34 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Return string representation of user"""
         return self.email
 
-    @property
-    def token(self):
-        """
-        Allows us to get a user's token by calling `user.token` instead of
-        `user.generate_jwt_token().
+    # @property
+    # def token(self):
+    #     """
+    #     Allows us to get a user's token by calling `user.token` instead of
+    #     `user.generate_jwt_token().
 
-        The `@property` decorator above makes this possible. `token` is called
-        a "dynamic property".
-        """
-        return self._generate_jwt_token()
+    #     The `@property` decorator above makes this possible. `token` is called
+    #     a "dynamic property".
+    #     """
+    #     return self._generate_jwt_token()
     
-    def _generate_jwt_token(self):
-        """
-        Generates a JSON Web Token that stores this user's ID and has an expiry
-        date set to 60 days into the future.
-        """
-        try:
-            dt = datetime.now() + timedelta(days=60)
+    # def _generate_jwt_token(self):
+    #     """
+    #     Generates a JSON Web Token that stores this user's ID and has an expiry
+    #     date set to 60 days into the future.
+    #     """
+    #     try:
+    #         dt = datetime.now() + timedelta(days=60)
             
-            token = jwt.encode({
-                'id': self.pk,
-                'name': self.name,
-                'exp': dt
-            }, settings.SECRET_KEY, algorithm='HS256')
-        except:
-            print("Unexpected error:", sys.exc_info()[0])
+    #         token = jwt.encode({
+    #             'id': self.pk,
+    #             'name': self.name,
+    #             'exp': dt
+    #         }, settings.SECRET_KEY, algorithm='HS256')
+    #     except:
+    #         print("Unexpected error:", sys.exc_info()[0])
 
-        return token.decode('utf-8')
+    #     return token.decode('utf-8')
 
 class ProfileFeedItem(models.Model):
     """Profile status update"""
